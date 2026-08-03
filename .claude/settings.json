@@ -1,7 +1,13 @@
 {
   "permissions": {
     "allow": [
-      "Bash(git init *)"
+      "Bash(git init *)",
+      "Bash(git remote *)",
+      "Bash(git push *)",
+      "Bash(git fetch *)",
+      "Bash(git checkout *)",
+      "Bash(git stash *)",
+      "Bash(git branch *)"
     ]
   }
 }
