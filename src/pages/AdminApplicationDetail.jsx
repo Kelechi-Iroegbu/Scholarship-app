@@ -148,7 +148,7 @@ export default function AdminApplicationDetail() {
         <ul className="mt-3 space-y-1">
           {documents.map((d) => (
             <li key={d.id} className="text-sm">
-              <a href={d.file_url} target="_blank" rel="noreferrer" className="text-primary underline">{d.file_name}</a>
+              <a href={appClient.resolveFileUrl(d.file_url)} target="_blank" rel="noreferrer" className="text-primary underline">{d.file_name}</a>
               <span className="ml-2 text-muted-foreground">({d.type})</span>
             </li>
           ))}

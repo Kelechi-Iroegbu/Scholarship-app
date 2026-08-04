@@ -68,6 +68,7 @@ const appClient = {
       UploadFile: async ({ file }) => api.uploadFile(file),
     },
   },
+  resolveFileUrl: (fileUrl) => api.resolveFileUrl(fileUrl),
 };
 
 export { appClient };

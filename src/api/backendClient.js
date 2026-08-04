@@ -1,3 +1,15 @@
+// In dev this stays '' — Vite's proxy forwards relative /api requests to the
+// local backend. In production (e.g. a static Vercel deploy with no proxy),
+// set VITE_API_BASE_URL to the deployed backend's origin, no trailing slash.
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '';
+
+// Uploaded-file URLs come back from the backend as relative paths
+// (/uploads/...), served by the backend itself, not the frontend host.
+const resolveFileUrl = (fileUrl) => {
+  if (!fileUrl || /^https?:\/\//.test(fileUrl)) return fileUrl;
+  return `${API_BASE_URL}${fileUrl}`;
+};
+
 const getAccessToken = () => window.localStorage.getItem('access_token');
 const setAccessToken = (token) => {
   if (token) {
@@ -27,7 +39,7 @@ const request = async (path, { method = 'GET', body, auth = true, headers = {} }
     init.body = JSON.stringify(body);
   }
 
-  const response = await fetch(path, init);
+  const response = await fetch(`${API_BASE_URL}${path}`, init);
   const text = await response.text();
   let data = null;
   try {
@@ -158,7 +170,7 @@ const uploadFile = async (file) => {
   const formData = new FormData();
   formData.append('file', file);
 
-  const response = await fetch('/api/uploads', {
+  const response = await fetch(`${API_BASE_URL}/api/uploads`, {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${getAccessToken()}`
@@ -183,5 +195,6 @@ export const api = {
   admin,
   uploadFile,
   setAccessToken,
-  getAccessToken
+  getAccessToken,
+  resolveFileUrl
 };

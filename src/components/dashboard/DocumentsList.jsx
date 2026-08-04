@@ -1,6 +1,7 @@
 import React from 'react';
 import { FileText } from 'lucide-react';
 import { DOCUMENT_TYPES } from '@/lib/applicationConstants';
+import { appClient } from '@/api/appClient';
 
 export default function DocumentsList({ documents }) {
   return (
@@ -12,7 +13,7 @@ export default function DocumentsList({ documents }) {
             <FileText className="h-4 w-4 text-primary shrink-0" />
             <span className="text-foreground/90">{label}:</span>
             {doc ? (
-              <a href={doc.file_url} target="_blank" rel="noreferrer" className="text-primary underline">
+              <a href={appClient.resolveFileUrl(doc.file_url)} target="_blank" rel="noreferrer" className="text-primary underline">
                 {doc.file_name}
               </a>
             ) : (
