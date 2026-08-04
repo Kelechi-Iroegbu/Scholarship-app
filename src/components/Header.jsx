@@ -23,6 +23,7 @@ export default function Header() {
   }, [location.pathname]);
 
   return (
+    <>
     <header className="sticky top-0 z-50 bg-card/95 backdrop-blur border-b border-border">
       {/* Top row: brand + apply button */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -101,54 +102,55 @@ export default function Header() {
           </nav>
         </div>
       </div>
-
-      {open && (
-        <div className="md:hidden fixed inset-0 top-20 z-40" onClick={() => setOpen(false)}>
-          <div className="absolute inset-0 bg-black/40" />
-          <div
-            id="mobile-menu"
-            className="absolute right-0 top-0 h-full w-72 max-w-[80%] bg-card shadow-xl p-5 flex flex-col gap-1"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <Link
-              to="/apply"
-              className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2.5 text-sm font-semibold tracking-wide text-primary-foreground mb-2 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-            >
-              APPLY NOW
-            </Link>
-            <Link
-              to="/donate"
-              className="inline-flex items-center justify-center rounded-md border border-foreground/30 px-4 py-2.5 text-sm font-semibold tracking-wide text-foreground mb-3 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary hover:border-secondary hover:text-secondary"
-            >
-              DONATE
-            </Link>
-            {!isAuthenticated && (
-              <Link
-                to="/login"
-                className="px-3 py-2.5 text-base font-medium rounded-md text-foreground hover:bg-muted transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary mb-2"
-              >
-                Log In
-              </Link>
-            )}
-            <nav aria-label="Mobile navigation" className="flex flex-col gap-1">
-              {items.map((item) => (
-                <NavLink
-                  key={item.label}
-                  to={item.path}
-                  end={item.path === '/'}
-                  className={({ isActive }) =>
-                    `px-3 py-2.5 text-base font-medium rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
-                      isActive ? 'text-primary bg-primary/10' : 'text-foreground hover:bg-muted'
-                    }`
-                  }
-                >
-                  {item.label}
-                </NavLink>
-              ))}
-            </nav>
-          </div>
-        </div>
-      )}
     </header>
+
+    {open && (
+      <div className="md:hidden fixed inset-0 top-20 z-40" onClick={() => setOpen(false)}>
+        <div className="absolute inset-0 bg-black/40" />
+        <div
+          id="mobile-menu"
+          className="absolute right-0 top-0 h-full w-72 max-w-[80%] bg-card shadow-xl p-5 flex flex-col gap-1"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <Link
+            to="/apply"
+            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2.5 text-sm font-semibold tracking-wide text-primary-foreground mb-2 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+          >
+            APPLY NOW
+          </Link>
+          <Link
+            to="/donate"
+            className="inline-flex items-center justify-center rounded-md border border-foreground/30 px-4 py-2.5 text-sm font-semibold tracking-wide text-foreground mb-3 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary hover:border-secondary hover:text-secondary"
+          >
+            DONATE
+          </Link>
+          {!isAuthenticated && (
+            <Link
+              to="/login"
+              className="px-3 py-2.5 text-base font-medium rounded-md text-foreground hover:bg-muted transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary mb-2"
+            >
+              Log In
+            </Link>
+          )}
+          <nav aria-label="Mobile navigation" className="flex flex-col gap-1">
+            {items.map((item) => (
+              <NavLink
+                key={item.label}
+                to={item.path}
+                end={item.path === '/'}
+                className={({ isActive }) =>
+                  `px-3 py-2.5 text-base font-medium rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
+                    isActive ? 'text-primary bg-primary/10' : 'text-foreground hover:bg-muted'
+                  }`
+                }
+              >
+                {item.label}
+              </NavLink>
+            ))}
+          </nav>
+        </div>
+      </div>
+    )}
+    </>
   );
 }
