@@ -45,16 +45,16 @@ export default function SubmissionPathways() {
             </h3>
             <p className="mt-2 text-sm text-muted-foreground leading-relaxed flex-1">
               For applicants without reliable internet access, documents can be submitted
-              directly to the National Youth Leader of the Ovim Youth Assembly, before the
+              directly to the Program Director of the Agu Egbe Foundation, before the
               commencement of the 2026/2027 academic session.
             </p>
             <div className="mt-6">
-              <p className="font-semibold text-foreground text-sm">Engr Nnamdi Ekebuike</p>
+              <p className="font-semibold text-foreground text-sm">Ugomma Ejimofo</p>
               <a
                 href="tel:08036000021"
                 className="mt-1 inline-flex items-center gap-2 text-secondary font-semibold text-sm hover:opacity-80"
               >
-                <Phone className="h-4 w-4" /> 0803 600 0021
+                <Phone className="h-4 w-4" /> +234 916 236 8804
               </a>
             </div>
           </div>
