@@ -35,12 +35,18 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = async (shouldRedirect = true) => {
-    setUser(null);
-    setIsAuthenticated(false);
+    // Clear the token server-side/locally *before* touching local state or
+    // navigating: flipping isAuthenticated first (while still on a
+    // ProtectedRoute-guarded page) makes it redirect client-side to
+    // /login?returnTo=..., which then races the hard reload below and can
+    // land the browser on a broken intermediate URL.
     await api.auth.logout();
     if (shouldRedirect) {
       window.location.href = '/login';
+      return;
     }
+    setUser(null);
+    setIsAuthenticated(false);
   };
 
   const navigateToLogin = () => {
