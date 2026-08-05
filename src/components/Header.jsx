@@ -18,19 +18,22 @@ export default function Header() {
   const navigate = useNavigate();
   const { isAuthenticated, user, logout } = useAuth();
   const isAdmin = user?.role === 'admin';
-  // The home page always reads as the public marketing page, even for a logged-in
-  // student, so the header there ignores auth state entirely.
-  const isHomePage = location.pathname === '/';
-  const isAuthed = isAuthenticated && !isHomePage;
   const accountLink = isAdmin ? { label: 'Admin', path: '/admin' } : { label: 'Dashboard', path: '/dashboard' };
-  // Students are scoped to just their dashboard so they aren't tempted onto pages
-  // that Layout will bounce them off of; admins keep the full site nav.
-  const items = !isAuthed ? navItems : isAdmin ? [...navItems, accountLink] : [accountLink];
-  const showMarketingLinks = !isAuthed || isAdmin;
+  const isAccountPage = location.pathname === '/dashboard' || location.pathname === '/apply';
+  // Students get the full, working public nav everywhere — including home —
+  // except on their own account pages (dashboard/apply), where it narrows to
+  // just their Dashboard tab. Admins always see the full nav plus Admin link.
+  const isScoped = isAuthenticated && !isAdmin && isAccountPage;
+  // Whether to show real "Sign Out" (vs. a "Log In" that just points an
+  // already-authenticated visitor back to their dashboard) — true whenever
+  // the header is actually acting as the account header, not the public one.
+  const isAccountHeader = isAuthenticated && (isAdmin || isAccountPage);
+  const items = isScoped ? [accountLink] : isAuthenticated ? [...navItems, accountLink] : navItems;
+  const showMarketingLinks = !isScoped;
 
-  // LOG IN still shows on the home page even when already authenticated (it
-  // stays fully public there) — clicking it shouldn't send a logged-in user
-  // through the login form again.
+  // LOG IN can show on public pages even while already authenticated (a
+  // student browsing Program/Scholars/etc. still sees the public header) —
+  // clicking it shouldn't send them through the login form again.
   const handleLoginClick = (e) => {
     if (!isAuthenticated) return;
     e.preventDefault();
@@ -63,7 +66,7 @@ export default function Header() {
           </Link>
 
           <div className="flex items-center gap-3">
-            {!isAuthed && (
+            {!isAccountHeader && (
               <Link
                 to="/login"
                 onClick={handleLoginClick}
@@ -72,7 +75,7 @@ export default function Header() {
                 LOG IN
               </Link>
             )}
-            {isAuthed && (
+            {isAccountHeader && (
               <button
                 type="button"
                 onClick={() => logout()}
@@ -163,7 +166,7 @@ export default function Header() {
               DONATE
             </Link>
           )}
-          {!isAuthed && (
+          {!isAccountHeader && (
             <Link
               to="/login"
               onClick={handleLoginClick}
@@ -173,7 +176,7 @@ export default function Header() {
             </Link>
           )}
           <nav aria-label="Mobile navigation" className="flex flex-col gap-1">
-            {isAuthed && (
+            {isAccountHeader && (
               <button
                 type="button"
                 onClick={() => logout()}
