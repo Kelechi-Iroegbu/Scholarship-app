@@ -6,7 +6,7 @@ import { Image } from '@/components/ui/image';
 export default function HeroBanner() {
   return (
     <section className="no-reveal relative w-full overflow-hidden bg-band text-band-foreground">
-      <div className="w-full mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 grid gap-12 md:grid-cols-2 items-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 grid gap-12 md:grid-cols-2 items-center">
         <div>
           <p className="text-secondary font-semibold text-sm tracking-[0.2em] uppercase">
             Ovim Hardship Scholarship
