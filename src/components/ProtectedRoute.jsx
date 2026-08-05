@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useAuth } from '@/lib/AuthContext';
 import UserNotRegisteredError from '@/components/UserNotRegisteredError';
 
@@ -9,8 +9,16 @@ const DefaultFallback = () => (
   </div>
 );
 
-export default function ProtectedRoute({ fallback = <DefaultFallback />, unauthenticatedElement }) {
+export default function ProtectedRoute({ fallback = <DefaultFallback /> }) {
   const { isAuthenticated, isLoadingAuth, authChecked, authError, checkUserAuth } = useAuth();
+  // Read the current path via useLocation (not window.location) so this stays
+  // correct across client-side navigation — the parent route tree is only
+  // built once, so a value read from window.location at that point would go
+  // stale and redirect back to whatever path was current at mount time.
+  const location = useLocation();
+  const unauthenticatedElement = (
+    <Navigate to={`/login?returnTo=${encodeURIComponent(location.pathname)}`} replace />
+  );
 
   useEffect(() => {
     if (!authChecked && !isLoadingAuth) {

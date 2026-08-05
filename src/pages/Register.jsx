@@ -64,7 +64,9 @@ export default function Register() {
         phone,
         indigene_confirmed: indigeneConfirmed,
       });
-      window.location.href = returnTo;
+      // No explicit returnTo (the common case) should land the new student on
+      // their dashboard, not the marketing home page.
+      window.location.href = safeReturnTo("/dashboard");
     } catch (err) {
       setError(err.message || "Registration failed");
     } finally {

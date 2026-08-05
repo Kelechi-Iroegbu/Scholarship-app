@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { appClient } from '@/api/appClient';
 import { Loader2, LogOut } from 'lucide-react';
@@ -12,12 +12,15 @@ import { useAuth } from '@/lib/AuthContext';
 export default function Dashboard() {
   const { logout } = useAuth();
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [application, setApplication] = useState(null);
   const [documents, setDocuments] = useState([]);
   const [messages, setMessages] = useState([]);
 
-  useEffect(() => {
-    (async () => {
+  const loadDashboard = useCallback(async () => {
+    setLoading(true);
+    setError(null);
+    try {
       const apps = await appClient.entities.Application.list('-created_date', 1);
       const app = apps[0] || null;
       setApplication(app);
@@ -29,14 +32,37 @@ export default function Dashboard() {
         setDocuments(docs);
         setMessages(msgs);
       }
+    } catch (err) {
+      setError(err.message || 'Something went wrong loading your dashboard.');
+    } finally {
       setLoading(false);
-    })();
+    }
   }, []);
+
+  useEffect(() => {
+    loadDashboard();
+  }, [loadDashboard]);
 
   if (loading) {
     return (
       <div className="flex items-center justify-center py-32">
         <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="max-w-2xl mx-auto px-4 py-24 text-center">
+        <h1 className="font-heading text-2xl font-semibold text-foreground">Couldn't Load Dashboard</h1>
+        <p className="mt-3 text-muted-foreground">{error}</p>
+        <div className="mt-6 flex items-center justify-center gap-3">
+          <Button onClick={loadDashboard}>Try Again</Button>
+          <Button variant="ghost" onClick={() => logout()}>
+            <LogOut className="h-4 w-4" />
+            Sign Out
+          </Button>
+        </div>
       </div>
     );
   }

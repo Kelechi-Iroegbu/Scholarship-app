@@ -1,7 +1,7 @@
 import { Toaster } from "@/components/ui/toaster"
 import { QueryClientProvider } from '@tanstack/react-query'
 import { queryClientInstance } from '@/lib/query-client'
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import ProtectedRoute from '@/components/ProtectedRoute';
 import PageNotFound from './lib/PageNotFound';
 import Login from '@/pages/Login';
@@ -57,13 +57,7 @@ const AuthenticatedApp = () => {
         <Route path="/about" element={<About />} />
         <Route path="/donate" element={<Donate />} />
         <Route path="/design-system" element={<DesignSystem />} />
-        <Route
-          element={
-            <ProtectedRoute
-              unauthenticatedElement={<Navigate to={`/login?returnTo=${encodeURIComponent(window.location.pathname)}`} replace />}
-            />
-          }
-        >
+        <Route element={<ProtectedRoute />}>
           <Route path="/apply" element={<Apply />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/admin" element={<AdminDashboard />} />

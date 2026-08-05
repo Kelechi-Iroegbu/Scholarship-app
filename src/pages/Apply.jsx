@@ -25,14 +25,17 @@ import { getDeadlineInfo, countWords, HARDSHIP_MIN_WORDS } from '@/lib/applicati
 export default function Apply() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState(null);
   const [saving, setSaving] = useState(false);
   const [application, setApplication] = useState(null);
   const [documents, setDocuments] = useState([]);
   const [cycle, setCycle] = useState(null);
   const [step, setStep] = useState(1);
 
-  useEffect(() => {
-    (async () => {
+  const loadApplication = useCallback(async () => {
+    setLoading(true);
+    setLoadError(null);
+    try {
       const user = await appClient.auth.me();
       const cycles = await appClient.entities.ApplicationCycle.filter({ is_active: true });
       const activeCycle = cycles[0] || null;
@@ -57,9 +60,16 @@ export default function Apply() {
         const docs = await appClient.entities.Document.filter({ application_id: app.id });
         setDocuments(docs);
       }
+    } catch (err) {
+      setLoadError(err.message || 'Something went wrong loading your application.');
+    } finally {
       setLoading(false);
-    })();
+    }
   }, []);
+
+  useEffect(() => {
+    loadApplication();
+  }, [loadApplication]);
 
   const handleChange = useCallback((field, value) => {
     setApplication((prev) => ({ ...prev, [field]: value }));
@@ -98,6 +108,19 @@ export default function Apply() {
     return (
       <div className="flex items-center justify-center py-32">
         <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      </div>
+    );
+  }
+
+  if (loadError) {
+    return (
+      <div className="max-w-2xl mx-auto px-4 py-24 text-center">
+        <h1 className="font-heading text-2xl font-semibold text-foreground">Couldn't Load Application</h1>
+        <p className="mt-3 text-muted-foreground">{loadError}</p>
+        <div className="mt-6 flex items-center justify-center gap-3">
+          <Button onClick={loadApplication}>Try Again</Button>
+          <Button variant="outline" onClick={() => navigate('/dashboard')}>Go to Dashboard</Button>
+        </div>
       </div>
     );
   }

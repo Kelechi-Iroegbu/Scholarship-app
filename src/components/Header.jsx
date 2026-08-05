@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import { Menu, X, GraduationCap } from 'lucide-react';
+import { Menu, X, GraduationCap, LogOut } from 'lucide-react';
 import { useAuth } from '@/lib/AuthContext';
 
 const navItems = [
@@ -14,9 +14,17 @@ const navItems = [
 export default function Header() {
   const [open, setOpen] = useState(false);
   const location = useLocation();
-  const { isAuthenticated, user } = useAuth();
-  const accountLink = user?.role === 'admin' ? { label: 'Admin', path: '/admin' } : { label: 'Dashboard', path: '/dashboard' };
-  const items = isAuthenticated ? [...navItems, accountLink] : navItems;
+  const { isAuthenticated, user, logout } = useAuth();
+  const isAdmin = user?.role === 'admin';
+  // The home page always reads as the public marketing page, even for a logged-in
+  // student, so the header there ignores auth state entirely.
+  const isHomePage = location.pathname === '/';
+  const isAuthed = isAuthenticated && !isHomePage;
+  const accountLink = isAdmin ? { label: 'Admin', path: '/admin' } : { label: 'Dashboard', path: '/dashboard' };
+  // Students are scoped to just their dashboard so they aren't tempted onto pages
+  // that Layout will bounce them off of; admins keep the full site nav.
+  const items = !isAuthed ? navItems : isAdmin ? [...navItems, accountLink] : [accountLink];
+  const showMarketingLinks = !isAuthed || isAdmin;
 
   useEffect(() => {
     setOpen(false);
@@ -43,7 +51,7 @@ export default function Header() {
           </Link>
 
           <div className="flex items-center gap-3">
-            {!isAuthenticated && (
+            {!isAuthed && (
               <Link
                 to="/login"
                 className="hidden sm:inline-flex items-center rounded-md px-3 py-2.5 text-sm font-semibold tracking-wide text-foreground/80 hover:text-primary transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
@@ -51,18 +59,32 @@ export default function Header() {
                 LOG IN
               </Link>
             )}
-            <Link
-              to="/donate"
-              className="hidden sm:inline-flex items-center rounded-md border border-foreground/30 px-5 py-2.5 text-sm font-semibold tracking-wide text-foreground hover:border-secondary hover:text-secondary transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary focus-visible:ring-offset-2"
-            >
-              DONATE
-            </Link>
-            <Link
-              to="/apply"
-              className="hidden sm:inline-flex items-center rounded-md bg-primary px-5 py-2.5 text-sm font-semibold tracking-wide text-primary-foreground hover:opacity-90 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
-            >
-              APPLY NOW
-            </Link>
+            {isAuthed && (
+              <button
+                type="button"
+                onClick={() => logout()}
+                className="hidden sm:inline-flex items-center gap-1.5 rounded-md px-3 py-2.5 text-sm font-semibold tracking-wide text-foreground/80 hover:text-primary transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+              >
+                <LogOut className="h-4 w-4" />
+                SIGN OUT
+              </button>
+            )}
+            {showMarketingLinks && (
+              <Link
+                to="/donate"
+                className="hidden sm:inline-flex items-center rounded-md border border-foreground/30 px-5 py-2.5 text-sm font-semibold tracking-wide text-foreground hover:border-secondary hover:text-secondary transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary focus-visible:ring-offset-2"
+              >
+                DONATE
+              </Link>
+            )}
+            {showMarketingLinks && (
+              <Link
+                to="/apply"
+                className="hidden sm:inline-flex items-center rounded-md bg-primary px-5 py-2.5 text-sm font-semibold tracking-wide text-primary-foreground hover:opacity-90 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+              >
+                APPLY NOW
+              </Link>
+            )}
             <button
               className="md:hidden inline-flex items-center justify-center rounded-md p-2 text-foreground hover:bg-muted transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
               onClick={() => setOpen((v) => !v)}
@@ -112,19 +134,23 @@ export default function Header() {
           className="absolute right-0 top-0 h-full w-72 max-w-[80%] bg-card shadow-xl p-5 flex flex-col gap-1"
           onClick={(e) => e.stopPropagation()}
         >
-          <Link
-            to="/apply"
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2.5 text-sm font-semibold tracking-wide text-primary-foreground mb-2 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-          >
-            APPLY NOW
-          </Link>
-          <Link
-            to="/donate"
-            className="inline-flex items-center justify-center rounded-md border border-foreground/30 px-4 py-2.5 text-sm font-semibold tracking-wide text-foreground mb-3 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary hover:border-secondary hover:text-secondary"
-          >
-            DONATE
-          </Link>
-          {!isAuthenticated && (
+          {showMarketingLinks && (
+            <Link
+              to="/apply"
+              className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2.5 text-sm font-semibold tracking-wide text-primary-foreground mb-2 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            >
+              APPLY NOW
+            </Link>
+          )}
+          {showMarketingLinks && (
+            <Link
+              to="/donate"
+              className="inline-flex items-center justify-center rounded-md border border-foreground/30 px-4 py-2.5 text-sm font-semibold tracking-wide text-foreground mb-3 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary hover:border-secondary hover:text-secondary"
+            >
+              DONATE
+            </Link>
+          )}
+          {!isAuthed && (
             <Link
               to="/login"
               className="px-3 py-2.5 text-base font-medium rounded-md text-foreground hover:bg-muted transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary mb-2"
@@ -133,6 +159,16 @@ export default function Header() {
             </Link>
           )}
           <nav aria-label="Mobile navigation" className="flex flex-col gap-1">
+            {isAuthed && (
+              <button
+                type="button"
+                onClick={() => logout()}
+                className="flex items-center gap-2 px-3 py-2.5 text-base font-medium rounded-md text-foreground hover:bg-muted transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary text-left"
+              >
+                <LogOut className="h-4 w-4" />
+                Sign Out
+              </button>
+            )}
             {items.map((item) => (
               <NavLink
                 key={item.label}

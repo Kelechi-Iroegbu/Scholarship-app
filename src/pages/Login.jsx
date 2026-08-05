@@ -22,8 +22,11 @@ export default function Login() {
     setError("");
     setLoading(true);
     try {
-      await appClient.auth.loginViaEmailPassword(email, password);
-      window.location.href = returnTo;
+      const result = await appClient.auth.loginViaEmailPassword(email, password);
+      // No explicit returnTo (the common case) should land the user on their
+      // own dashboard, not the marketing home page.
+      const defaultDestination = result.user?.role === "admin" ? "/admin" : "/dashboard";
+      window.location.href = safeReturnTo(defaultDestination);
     } catch (err) {
       setError(err.message || "Invalid email or password");
     } finally {
