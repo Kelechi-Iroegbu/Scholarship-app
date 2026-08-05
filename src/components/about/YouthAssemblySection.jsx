@@ -4,7 +4,7 @@ import { Users } from 'lucide-react';
 export default function YouthAssemblySection() {
   return (
     <section className="py-14 sm:py-16">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid gap-10 md:grid-cols-2 items-center">
+      <div className="w-full px-4 sm:px-6 lg:px-12 grid gap-10 md:grid-cols-2 items-center">
         <div className="relative">
           <div className="aspect-[4/3] rounded-xl border border-border bg-band flex flex-col items-center justify-center gap-3">
             <Users className="h-12 w-12 text-secondary" aria-hidden="true" />
