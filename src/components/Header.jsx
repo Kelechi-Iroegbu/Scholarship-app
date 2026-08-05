@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Link, NavLink, useLocation } from 'react-router-dom';
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X, GraduationCap, LogOut } from 'lucide-react';
 import { useAuth } from '@/lib/AuthContext';
+import { toast } from '@/components/ui/use-toast';
 
 const navItems = [
   { label: 'Program', path: '/program' },
@@ -14,6 +15,7 @@ const navItems = [
 export default function Header() {
   const [open, setOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
   const { isAuthenticated, user, logout } = useAuth();
   const isAdmin = user?.role === 'admin';
   // The home page always reads as the public marketing page, even for a logged-in
@@ -25,6 +27,16 @@ export default function Header() {
   // that Layout will bounce them off of; admins keep the full site nav.
   const items = !isAuthed ? navItems : isAdmin ? [...navItems, accountLink] : [accountLink];
   const showMarketingLinks = !isAuthed || isAdmin;
+
+  // LOG IN still shows on the home page even when already authenticated (it
+  // stays fully public there) — clicking it shouldn't send a logged-in user
+  // through the login form again.
+  const handleLoginClick = (e) => {
+    if (!isAuthenticated) return;
+    e.preventDefault();
+    toast({ title: "You're already logged in", description: 'Taking you to your dashboard.' });
+    navigate(isAdmin ? '/admin' : '/dashboard');
+  };
 
   useEffect(() => {
     setOpen(false);
@@ -54,6 +66,7 @@ export default function Header() {
             {!isAuthed && (
               <Link
                 to="/login"
+                onClick={handleLoginClick}
                 className="hidden sm:inline-flex items-center rounded-md px-3 py-2.5 text-sm font-semibold tracking-wide text-foreground/80 hover:text-primary transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
               >
                 LOG IN
@@ -153,6 +166,7 @@ export default function Header() {
           {!isAuthed && (
             <Link
               to="/login"
+              onClick={handleLoginClick}
               className="px-3 py-2.5 text-base font-medium rounded-md text-foreground hover:bg-muted transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary mb-2"
             >
               Log In
