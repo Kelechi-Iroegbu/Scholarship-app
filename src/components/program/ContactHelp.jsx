@@ -17,20 +17,20 @@ export default function ContactHelp() {
             <User className="h-7 w-7" />
           </span>
           <div>
-            <p className="font-heading font-semibold text-foreground">Engr Nnamdi Ekebuike</p>
-            <p className="text-sm text-muted-foreground">National Youth Leader, Ovim Youth Assembly</p>
+            <p className="font-heading font-semibold text-foreground">Ugomma Ejimofo</p>
+            <p className="text-sm text-muted-foreground">Program Director, Ovim Youth Assembly</p>
           </div>
         </div>
 
         <div className="mt-6 grid gap-3 sm:grid-cols-3">
           <a
-            href="tel:08036000021"
+            href="tel:+2349162368804"
             className="inline-flex items-center justify-center gap-2 rounded-md bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground hover:opacity-90 transition"
           >
             <Phone className="h-4 w-4" /> Call
           </a>
           <a
-            href="https://wa.me/2348036000021"
+            href="https://wa.me/2349162368804"
             className="inline-flex items-center justify-center gap-2 rounded-md border border-border px-4 py-2.5 text-sm font-semibold text-foreground hover:border-primary hover:text-primary transition"
           >
             <MessageCircle className="h-4 w-4" /> WhatsApp

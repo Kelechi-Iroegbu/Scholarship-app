@@ -29,8 +29,8 @@ export default function YouthAssemblySection() {
             submit them correctly and on time.
           </p>
           <p className="mt-4 text-muted-foreground text-base sm:text-lg leading-relaxed">
-            For applicants submitting documents in person, the National Youth Leader,{' '}
-            <span className="font-semibold text-foreground">Engr Nnamdi Ekebuike</span>, serves as the
+            For applicants submitting documents in person, the Program Director,{' '}
+            <span className="font-semibold text-foreground">Ugomma Ejimofo</span>, serves as the
             local point of contact in Ovim.
           </p>
         </div>

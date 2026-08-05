@@ -2,7 +2,7 @@ import React from 'react';
 import { Phone, Mail, MapPin, Leaf } from 'lucide-react';
 
 const items = [
-  { icon: Phone, label: 'Phone', value: '0803 600 0021' },
+  { icon: Phone, label: 'Phone', value: '+234 916 236 8804' },
   { icon: Mail, label: 'Email', value: '[email address to confirm]' },
   { icon: MapPin, label: 'Address', value: '[physical address to confirm]' },
 ];

@@ -62,12 +62,12 @@ export default function Footer() {
 
         <div>
           <h4 className="font-heading text-base font-semibold">Contact</h4>
-          <p className="mt-4 text-sm text-band-foreground/70">National Youth Leader</p>
-          <p className="text-sm font-semibold text-band-foreground">Engr Nnamdi Ekebuike</p>
+          <p className="mt-4 text-sm text-band-foreground/70">Program Director</p>
+          <p className="text-sm font-semibold text-band-foreground">Ugomma Ejimofo</p>
           <ul className="mt-4 space-y-2 text-sm">
             <li>
-              <a href="tel:08036000021" className="flex items-center gap-2 text-band-foreground/80 hover:text-secondary transition">
-                <Phone className="h-4 w-4 shrink-0" /> +234 803 600 0021
+              <a href="tel:+2349162368804" className="flex items-center gap-2 text-band-foreground/80 hover:text-secondary transition">
+                <Phone className="h-4 w-4 shrink-0" /> +234 916 236 8804
               </a>
             </li>
             <li>

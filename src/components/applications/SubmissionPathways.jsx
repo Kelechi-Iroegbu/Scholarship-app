@@ -51,7 +51,7 @@ export default function SubmissionPathways() {
             <div className="mt-6">
               <p className="font-semibold text-foreground text-sm">Ugomma Ejimofo</p>
               <a
-                href="tel:08036000021"
+                href="tel:+2349162368804"
                 className="mt-1 inline-flex items-center gap-2 text-secondary font-semibold text-sm hover:opacity-80"
               >
                 <Phone className="h-4 w-4" /> +234 916 236 8804
