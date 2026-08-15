@@ -1,6 +1,7 @@
 import { randomUUID } from 'crypto';
 import { User } from '../models/User.js';
 import { toSafeUser } from '../views/userView.js';
+import { sendPasswordResetEmail } from '../utils/sendEmail.js';
 
 export const me = (req, res) => {
   res.json({ user: toSafeUser(req.user) });
@@ -53,7 +54,7 @@ export const forgotPassword = async (req, res) => {
     user.reset_token = randomUUID();
     user.reset_token_expires = Date.now() + 1000 * 60 * 60;
     await User.save(user);
-    console.log(`Password reset token for ${email}: ${user.reset_token}`);
+    await sendPasswordResetEmail(user.email, user.reset_token);
   }
   res.json({ message: 'If an account exists with that email, you will receive reset instructions.' });
 };
