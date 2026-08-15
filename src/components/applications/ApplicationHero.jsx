@@ -15,8 +15,9 @@ export default function ApplicationHero() {
             Apply for the 2026/2027 Scholarship
           </h1>
           <p className="mt-5 text-muted-foreground text-base sm:text-lg leading-relaxed max-w-md">
-            Qualified indigent candidates from Ovim can apply online for the Agu Egbe Foundation
-            Scholarship. This page walks you through what to expect — from eligibility to
+            Qualified indigent candidates from Ovim can apply online for the Anna Nnenna Egbe
+            Queen Heart of Peace Educational Foundation Scholarship. This page walks you through
+            what to expect — from eligibility to
             submission.
           </p>
           <div className="mt-8 flex flex-wrap gap-4">

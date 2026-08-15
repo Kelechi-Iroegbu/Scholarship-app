@@ -6,7 +6,7 @@ const details = [
   { icon: Wallet, label: 'Coverage', value: 'Tuition Assistance' },
   { icon: MapPin, label: 'Location', value: 'Ovim' },
   { icon: Users, label: 'Target', value: 'First-Year Students' },
-  { icon: Award, label: 'Sponsor', value: 'President General, Agu Egbe Foundation' },
+  { icon: Award, label: 'Sponsor', value: 'President General, Anna Nnenna Egbe Queen Heart of Peace Educational Foundation' },
   { icon: Clock, label: 'Duration', value: 'One Academic Year' },
 ];
 
@@ -22,7 +22,8 @@ export default function AboutProgram() {
             About the Scholarship
           </h2>
           <p className="mt-5 text-muted-foreground text-base leading-relaxed">
-            The Agu Egbe Foundation Scholarship is a hardship scholarship program designed to
+            The Anna Nnenna Egbe Queen Heart of Peace Educational Foundation Scholarship is a
+            hardship scholarship program designed to
             support indigent, first-year undergraduate students in beginning their university
             education without financial barriers.
           </p>

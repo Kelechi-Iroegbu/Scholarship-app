@@ -28,7 +28,7 @@ export default function Footer() {
             <span className="flex h-9 w-9 items-center justify-center rounded-md bg-secondary text-secondary-foreground shrink-0">
               <GraduationCap className="h-5 w-5" />
             </span>
-            <h3 className="font-heading text-base font-semibold">Agu Egbe Foundation</h3>
+            <h3 className="font-heading text-base font-semibold">Anna Nnenna Egbe Queen Heart of Peace Educational Foundation</h3>
           </div>
           <p className="mt-4 text-sm text-band-foreground/70 leading-relaxed">
             Empowering Ovim's youth through education and opportunity.
@@ -110,7 +110,7 @@ export default function Footer() {
 
       <div className="border-t border-band-foreground/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 text-center text-xs text-band-foreground/75">
-          © {new Date().getFullYear()} Agu Egbe Foundation. All rights reserved.
+          © {new Date().getFullYear()} Anna Nnenna Egbe Queen Heart of Peace Educational Foundation. All rights reserved.
         </div>
       </div>
     </footer>

@@ -13,8 +13,9 @@ export default function ScholarsHero() {
             Celebrating Ovim's Rising Scholars
           </h1>
           <p className="mt-5 text-muted-foreground text-base sm:text-lg leading-relaxed max-w-md">
-            This page celebrates the current and past recipients of the Agu Egbe Foundation
-            Hardship Scholarship — indigenes of Ovim whose determination, once matched with
+            This page celebrates the current and past recipients of the Anna Nnenna Egbe Queen
+            Heart of Peace Educational Foundation Scholarship — indigenes of Ovim whose
+            determination, once matched with
             opportunity, is carrying them into universities across Nigeria.
           </p>
         </div>

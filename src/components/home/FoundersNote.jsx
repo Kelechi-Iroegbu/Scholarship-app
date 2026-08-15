@@ -25,7 +25,7 @@ export default function FoundersNote() {
       <p className="mt-8 font-heading text-base text-foreground">
         — Agu Godswill Egbe
         <span className="block text-sm font-body font-normal text-muted-foreground">
-          Founder, AGU Godswill Egbe Foundation
+          Founder, Anna Nnenna Egbe Queen Heart of Peace Educational Foundation
         </span>
       </p>
     </section>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-// Self-contained design system reference for the Agu Egbe Foundation.
+// Self-contained design system reference for the Anna Nnenna Egbe Queen Heart of Peace Educational Foundation.
 // All colors, spacing, and type live in CSS variables below so they can be
 // copied straight into index.css / tailwind.config.js later.
 

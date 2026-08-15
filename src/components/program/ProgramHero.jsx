@@ -14,7 +14,7 @@ export default function ProgramHero() {
             2026/2027 Academic Session
           </p>
           <h1 className="mt-4 font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
-            Agu Egbe Foundation Scholarship
+            Anna Nnenna Egbe Queen Heart of Peace Educational Foundation Scholarship
           </h1>
           <p className="mt-5 text-muted-foreground text-base sm:text-lg leading-relaxed max-w-md">
             Supporting brilliant students from Ovim to begin university with dignity, opportunity

@@ -45,7 +45,8 @@ export default function SubmissionPathways() {
             </h3>
             <p className="mt-2 text-sm text-muted-foreground leading-relaxed flex-1">
               For applicants without reliable internet access, documents can be submitted
-              directly to the Program Director of the Agu Egbe Foundation, before the
+              directly to the Program Director of the Anna Nnenna Egbe Queen Heart of Peace
+              Educational Foundation, before the
               commencement of the 2026/2027 academic session.
             </p>
             <div className="mt-6">

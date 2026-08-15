@@ -10,7 +10,8 @@ export default function Donate() {
       />
       <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 text-center">
         <p className="text-muted-foreground text-base sm:text-lg leading-relaxed">
-          Every gift to the Agu Egbe Foundation goes directly toward tuition and essential costs
+          Every gift to the Anna Nnenna Egbe Queen Heart of Peace Educational Foundation goes
+          directly toward tuition and essential costs
           for first-year undergraduate indigenes of Ovim who have earned admission but lack the
           means to begin their studies. Your support turns hardship into opportunity and helps a
           deserving student step into the classroom.

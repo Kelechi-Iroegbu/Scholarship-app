@@ -57,10 +57,7 @@ export default function Header() {
             </span>
             <span className="leading-tight">
               <span className="block font-heading text-base sm:text-lg font-semibold text-foreground tracking-tight">
-                Agu Egbe Foundation
-              </span>
-              <span className="block text-[10px] sm:text-xs font-body font-normal tracking-wide text-muted-foreground">
-                Ovim Hardship Scholarship
+                Anna Nnenna Egbe Queen Heart of Peace Educational Foundation
               </span>
             </span>
           </Link>

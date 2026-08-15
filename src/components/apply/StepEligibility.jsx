@@ -33,7 +33,8 @@ export default function StepEligibility({ data, onChange }) {
         <h2 className="font-heading text-xl font-semibold text-foreground">Eligibility Form</h2>
         <p className="mt-1.5 text-sm text-muted-foreground">
           Please answer honestly and completely — this information helps the committee understand
-          your background and confirm your eligibility for the Ovim Hardship Scholarship.
+          your background and confirm your eligibility for the Anna Nnenna Egbe Queen Heart of
+          Peace Educational Foundation Scholarship.
         </p>
       </div>
 

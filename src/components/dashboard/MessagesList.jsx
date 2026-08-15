@@ -12,7 +12,7 @@ export default function MessagesList({ messages }) {
         <li key={m.id} className="rounded-md border border-border p-4">
           <div className="flex items-center gap-2 text-xs text-muted-foreground">
             <MessageSquare className="h-4 w-4 text-primary" />
-            <span className="font-medium text-foreground">{m.sender_name || 'AGU Godswill Egbe Foundation'}</span>
+            <span className="font-medium text-foreground">{m.sender_name || 'Anna Nnenna Egbe Queen Heart of Peace Educational Foundation'}</span>
             <span>· {format(new Date(m.created_date), 'MMM d, yyyy')}</span>
           </div>
           <p className="mt-2 text-sm text-foreground/90">{m.message}</p>

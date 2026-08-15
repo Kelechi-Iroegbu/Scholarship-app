@@ -8,7 +8,7 @@ export default function FoundationStory() {
         <div>
           <p className="text-secondary font-semibold text-sm tracking-[0.2em] uppercase">Our Story</p>
           <h2 className="mt-4 font-heading text-3xl sm:text-4xl font-bold text-foreground leading-tight">
-            Why the Agu Egbe Foundation Exists
+            Why the Anna Nnenna Egbe Queen Heart of Peace Educational Foundation Exists
           </h2>
           <span className="mt-5 block h-1.5 w-16 rounded-full bg-secondary" />
 
@@ -20,7 +20,7 @@ export default function FoundationStory() {
 
         <div className="space-y-4 text-muted-foreground text-base sm:text-lg leading-relaxed">
           <p>
-            The Agu Egbe Foundation was established to stand between talented young people from Ovim
+            The Anna Nnenna Egbe Queen Heart of Peace Educational Foundation was established to stand between talented young people from Ovim
             and the financial hardship that too often ends their education before it truly begins.
             We believe that a first-year admission letter should be the start of a story, not the end
             of one.

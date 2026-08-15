@@ -8,7 +8,7 @@ export default function MissionIntro() {
       </p>
       <div className="mt-8 space-y-5 text-muted-foreground text-base sm:text-lg leading-relaxed">
         <p>
-          [Placeholder paragraph] The AGU Godswill Egbe Foundation exists to remove the
+          [Placeholder paragraph] The Anna Nnenna Egbe Queen Heart of Peace Educational Foundation exists to remove the
           financial barriers that keep talented young people from pursuing higher education,
           replacing them with the support, community, and confidence they need to thrive.
         </p>

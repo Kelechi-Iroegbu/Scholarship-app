@@ -26,7 +26,7 @@ export const NEWS_ARTICLES = [
   {
     id: 4,
     category: 'Announcements',
-    headline: '[Agu Egbe Foundation Launches New Scholarship Portal]',
+    headline: '[Anna Nnenna Egbe Queen Heart of Peace Educational Foundation Launches New Scholarship Portal]',
     date: '2026-06-28',
     excerpt: '[Placeholder excerpt — details about the new online application system.]',
   },

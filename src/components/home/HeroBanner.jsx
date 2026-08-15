@@ -9,7 +9,7 @@ export default function HeroBanner() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 grid gap-12 md:grid-cols-2 items-center">
         <div>
           <p className="text-secondary font-semibold text-sm tracking-[0.2em] uppercase">
-            Ovim Hardship Scholarship
+            Anna Nnenna Egbe Queen Heart of Peace Educational Foundation
           </p>
           <h1 className="mt-5 font-heading text-4xl sm:text-5xl font-bold leading-tight">
             <span className="hero-line">Opening the Door to Tertiary Education for</span>
@@ -17,7 +17,7 @@ export default function HeroBanner() {
           </h1>
           <span className="hero-underline origin-left mt-5 block h-1.5 w-16 rounded-full bg-secondary" />
           <p className="hero-subheadline mt-6 text-band-foreground/80 text-base sm:text-lg max-w-md leading-relaxed">
-            The Agu Egbe Foundation covers tuition and essential costs for indigent, first-year
+            The Anna Nnenna Egbe Queen Heart of Peace Educational Foundation covers tuition and essential costs for indigent, first-year
             undergraduate indigenes of Ovim — so that financial hardship never stands between a
             willing student and a university education.
           </p>
