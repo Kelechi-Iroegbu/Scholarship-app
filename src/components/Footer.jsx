@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { GraduationCap, Facebook, Instagram, Twitter, Linkedin, Phone, Mail, MapPin, ArrowRight } from 'lucide-react';
+import { Facebook, Instagram, Twitter, Linkedin, Phone, Mail, MapPin, ArrowRight } from 'lucide-react';
 
 const navLinks = [
   { label: 'Program', path: '/' },
@@ -25,9 +25,11 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 grid gap-10 sm:grid-cols-2 md:grid-cols-4">
         <div>
           <div className="flex items-center gap-3">
-            <span className="flex h-9 w-9 items-center justify-center rounded-md bg-secondary text-secondary-foreground shrink-0">
-              <GraduationCap className="h-5 w-5" />
-            </span>
+            <img
+              src="/images/logo.png"
+              alt="Anna Nnenna Egbe Queen Heart of Peace Educational Foundation"
+              className="h-9 w-9 object-contain shrink-0"
+            />
             <h3 className="font-heading text-base font-semibold">Anna Nnenna Egbe Queen Heart of Peace Educational Foundation</h3>
           </div>
           <p className="mt-4 text-sm text-band-foreground/70 leading-relaxed">

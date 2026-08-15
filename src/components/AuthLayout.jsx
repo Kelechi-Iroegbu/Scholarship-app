@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { GraduationCap } from "lucide-react";
 
 export default function AuthLayout({ icon: Icon, title, subtitle, footer, children }) {
   return (
@@ -9,9 +8,11 @@ export default function AuthLayout({ icon: Icon, title, subtitle, footer, childr
         to="/"
         className="header-logo fixed top-6 left-4 sm:left-6 lg:left-8 inline-flex items-center gap-3 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
       >
-        <span className="flex h-11 w-11 items-center justify-center rounded-md bg-primary text-primary-foreground shrink-0">
-          <GraduationCap className="h-6 w-6" />
-        </span>
+        <img
+          src="/images/logo.png"
+          alt="Anna Nnenna Egbe Queen Heart of Peace Educational Foundation"
+          className="h-11 w-11 object-contain shrink-0"
+        />
         <span className="leading-tight text-left">
           <span className="block font-heading text-base sm:text-lg font-semibold text-foreground tracking-tight">
             Anna Nnenna Egbe Queen Heart of Peace Educational Foundation

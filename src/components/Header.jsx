@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
-import { Menu, X, GraduationCap, LogOut } from 'lucide-react';
+import { Menu, X, LogOut } from 'lucide-react';
 import { useAuth } from '@/lib/AuthContext';
 import { toast } from '@/components/ui/use-toast';
 
@@ -52,9 +52,11 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-20 items-center justify-between">
           <Link to="/" className="header-logo flex items-center gap-4 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">
-            <span className="flex h-11 w-11 items-center justify-center rounded-md bg-primary text-primary-foreground shrink-0">
-              <GraduationCap className="h-6 w-6" />
-            </span>
+            <img
+              src="/images/logo.png"
+              alt="Anna Nnenna Egbe Queen Heart of Peace Educational Foundation"
+              className="h-11 w-11 object-contain shrink-0"
+            />
             <span className="leading-tight">
               <span className="block font-heading text-base sm:text-lg font-semibold text-foreground tracking-tight">
                 Anna Nnenna Egbe Queen Heart of Peace Educational Foundation
