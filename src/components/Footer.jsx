@@ -28,7 +28,7 @@ export default function Footer() {
             <img
               src="/images/logo.png"
               alt="Anna Nnenna Egbe Queen Heart of Peace Educational Foundation"
-              className="h-9 w-9 object-contain shrink-0"
+              className="h-16 w-16 sm:h-20 sm:w-20 object-contain shrink-0"
             />
             <h3 className="font-heading text-base font-semibold">Anna Nnenna Egbe Queen Heart of Peace Educational Foundation</h3>
           </div>
