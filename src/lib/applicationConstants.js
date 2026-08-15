@@ -15,6 +15,18 @@ export const SOP_MIN_WORDS = 200;
 export const SOP_MAX_WORDS = 600;
 export const HARDSHIP_MIN_WORDS = 250;
 
+// Ovim → major community → autonomous community, used to verify indigene
+// status on the eligibility form. The autonomous community list depends on
+// the selected major community — see StepEligibility.jsx.
+export const OVIM_COMMUNITIES = {
+  Ohoroho: ['Ugwunta', 'Amangeleukwu', 'Amachiebe', 'Agbo Ohoroho', 'Ndiekwukwu'],
+  Amune: ['Obiliohia', 'Elu Amune', 'Umukwu', 'Umusuehi', 'Umuobia', 'Oro'],
+  Ohonja: ['Amabo', 'Mgbelama', 'Amukabi'],
+  Ameke: ['Ameke Elu', 'Amuzu', 'Umudinja'],
+  Obayi: ['Elu Obayi', 'Agbo Obayi', 'Umuanya', 'Elugwunta', 'Amanyawu', 'Amokwe Obayi', 'Ndiugbo'],
+};
+export const OVIM_MAJOR_COMMUNITIES = Object.keys(OVIM_COMMUNITIES);
+
 export const DOCUMENT_TYPES = [
   { key: 'lga_certificate', label: 'Local Government of Origin Certificate' },
   { key: 'ssce_result', label: 'SSCE Result' },
@@ -60,8 +72,11 @@ export function getEligibilityStatus(app) {
   const filledCount = ELIGIBILITY_FIELDS.filter((f) => app[f] !== undefined && app[f] !== null && app[f] !== '').length;
   const confirmationsSet = app.indigene_confirmed !== undefined && app.indigene_confirmed !== null &&
     app.school_in_isuikwuato !== undefined && app.school_in_isuikwuato !== null;
+  // Major/autonomous community are only required once the applicant has
+  // confirmed they're an Ovim indigene — a "No" answer is itself complete.
+  const communitySet = app.indigene_confirmed !== true || (!!app.major_community && !!app.autonomous_community);
   if (filledCount === 0 && !confirmationsSet) return 'not_started';
-  if (filledCount === ELIGIBILITY_FIELDS.length && confirmationsSet) return 'complete';
+  if (filledCount === ELIGIBILITY_FIELDS.length && confirmationsSet && communitySet) return 'complete';
   return 'in_progress';
 }
 

@@ -2,6 +2,8 @@ import React from 'react';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { OVIM_COMMUNITIES, OVIM_MAJOR_COMMUNITIES } from '@/lib/applicationConstants';
 
 function YesNo({ id, label, value, onChange, note }) {
   return (
@@ -22,6 +24,92 @@ function YesNo({ id, label, value, onChange, note }) {
         </div>
       </RadioGroup>
       {note && <p className="mt-1.5 text-xs text-muted-foreground">{note}</p>}
+    </div>
+  );
+}
+
+// Ovim → major community → autonomous community. Autonomous community is a
+// dependent select (no free text) so applicants can't claim a community that
+// doesn't belong to their chosen major community, and it resets whenever the
+// major community changes.
+function OvimIndigeneSection({ data, onChange }) {
+  const handleIndigeneChange = (isIndigene) => {
+    onChange('indigene_confirmed', isIndigene);
+    if (!isIndigene) {
+      onChange('major_community', null);
+      onChange('autonomous_community', null);
+    }
+  };
+
+  const handleMajorCommunityChange = (community) => {
+    onChange('major_community', community);
+    onChange('autonomous_community', null);
+  };
+
+  return (
+    <div className="space-y-4">
+      <YesNo
+        id="indigene"
+        label="Are you an indigene of Ovim?"
+        value={data.indigene_confirmed}
+        onChange={handleIndigeneChange}
+        note="Please note: a false claim of indigeneship will disqualify your application."
+      />
+
+      {data.indigene_confirmed === false && (
+        <div className="rounded-md border border-destructive/30 bg-destructive/5 px-4 py-3 text-sm font-medium text-destructive">
+          You are not eligible under the Ovim indigene category.
+        </div>
+      )}
+
+      {data.indigene_confirmed === true && (
+        <div className="space-y-4 rounded-md border border-border bg-muted/30 p-4">
+          <div>
+            <Label htmlFor="major_community">
+              Which major community in Ovim are you from? <span className="text-destructive">*</span>
+            </Label>
+            <Select value={data.major_community || ''} onValueChange={handleMajorCommunityChange}>
+              <SelectTrigger id="major_community" className="mt-1.5 bg-card">
+                <SelectValue placeholder="Select major community" />
+              </SelectTrigger>
+              <SelectContent>
+                {OVIM_MAJOR_COMMUNITIES.map((community) => (
+                  <SelectItem key={community} value={community}>{community}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+
+          {data.major_community && (
+            <div>
+              <Label htmlFor="autonomous_community">
+                Select your Autonomous Community <span className="text-destructive">*</span>
+              </Label>
+              <Select
+                value={data.autonomous_community || ''}
+                onValueChange={(v) => onChange('autonomous_community', v)}
+              >
+                <SelectTrigger id="autonomous_community" className="mt-1.5 bg-card">
+                  <SelectValue placeholder="Select autonomous community" />
+                </SelectTrigger>
+                <SelectContent>
+                  {OVIM_COMMUNITIES[data.major_community].map((community) => (
+                    <SelectItem key={community} value={community}>{community}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          )}
+
+          <p className="text-xs text-muted-foreground leading-relaxed">
+            <span className="font-semibold text-foreground">Important:</span> To qualify as an Ovim
+            indigene, you must belong to one of the recognized major communities of Ovim and be an
+            indigene/citizen of an autonomous community under that major community. Please provide
+            accurate information. False claims of indigene status may result in disqualification
+            from the scholarship application.
+          </p>
+        </div>
+      )}
     </div>
   );
 }
@@ -54,13 +142,7 @@ export default function StepEligibility({ data, onChange }) {
         </div>
       </div>
 
-      <YesNo
-        id="indigene"
-        label="Are you an indigene of Ovim?"
-        value={data.indigene_confirmed}
-        onChange={(v) => onChange('indigene_confirmed', v)}
-        note="Please note: a false claim of indigeneship will disqualify your application."
-      />
+      <OvimIndigeneSection data={data} onChange={onChange} />
 
       <div>
         <Label htmlFor="address">Current Residential Address in Ovim</Label>

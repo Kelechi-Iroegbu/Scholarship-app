@@ -111,6 +111,14 @@ export default function AdminApplicationDetail() {
           <p className="text-foreground">{application.indigene_confirmed ? 'Yes' : 'No'}</p>
         </div>
         <div>
+          <p className="text-muted-foreground">Major Community</p>
+          <p className="text-foreground">{application.major_community || '—'}</p>
+        </div>
+        <div>
+          <p className="text-muted-foreground">Autonomous Community</p>
+          <p className="text-foreground">{application.autonomous_community || '—'}</p>
+        </div>
+        <div>
           <p className="text-muted-foreground">Address</p>
           <p className="text-foreground">{application.address}</p>
         </div>

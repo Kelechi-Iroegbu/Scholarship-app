@@ -28,6 +28,11 @@ export default function StepReview({ data, documents, onEditStep }) {
         <p className="text-sm text-muted-foreground">
           {data.full_name} · DOB {data.date_of_birth || '—'} · Indigene: {data.indigene_confirmed ? 'Yes' : 'No'}
         </p>
+        {data.indigene_confirmed && (
+          <p className="mt-1 text-sm text-muted-foreground">
+            {data.major_community || '—'} · {data.autonomous_community || '—'}
+          </p>
+        )}
         <p className="mt-1 text-sm text-muted-foreground">{data.address}</p>
         <p className="mt-1 text-sm text-muted-foreground">
           {data.school} (Isuikwuato LGA: {data.school_in_isuikwuato ? 'Yes' : 'No'})

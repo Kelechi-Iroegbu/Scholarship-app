@@ -41,6 +41,8 @@ const DDL = `
     -- as a timestamp and break that controlled input.
     date_of_birth TEXT,
     indigene_confirmed BOOLEAN,
+    major_community TEXT,
+    autonomous_community TEXT,
     address TEXT,
     school TEXT,
     school_in_isuikwuato BOOLEAN,
@@ -52,6 +54,12 @@ const DDL = `
     financial_hardship_statement TEXT,
     created_date TIMESTAMPTZ NOT NULL DEFAULT now()
   );
+  -- CREATE TABLE IF NOT EXISTS above only applies on a fresh database, so
+  -- columns added later need an explicit ALTER for databases that already
+  -- have this table.
+  ALTER TABLE applications ADD COLUMN IF NOT EXISTS major_community TEXT;
+  ALTER TABLE applications ADD COLUMN IF NOT EXISTS autonomous_community TEXT;
+
   CREATE INDEX IF NOT EXISTS applications_user_id_idx ON applications(user_id);
   CREATE INDEX IF NOT EXISTS applications_cycle_id_idx ON applications(cycle_id);
 

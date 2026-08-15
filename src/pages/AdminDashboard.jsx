@@ -3,7 +3,7 @@ import { appClient } from '@/api/appClient';
 import { Loader2 } from 'lucide-react';
 import ApplicationsTable from '@/components/admin/ApplicationsTable';
 import AdminCycleManager from '@/components/admin/AdminCycleManager';
-import { STATUS_LABELS } from '@/lib/applicationConstants';
+import { STATUS_LABELS, OVIM_MAJOR_COMMUNITIES } from '@/lib/applicationConstants';
 
 export default function AdminDashboard() {
   const [loading, setLoading] = useState(true);
@@ -11,6 +11,7 @@ export default function AdminDashboard() {
   const [applications, setApplications] = useState([]);
   const [cycles, setCycles] = useState([]);
   const [statusFilter, setStatusFilter] = useState('all');
+  const [communityFilter, setCommunityFilter] = useState('all');
 
   useEffect(() => {
     (async () => {
@@ -47,7 +48,9 @@ export default function AdminDashboard() {
     );
   }
 
-  const filtered = statusFilter === 'all' ? applications : applications.filter((a) => a.status === statusFilter);
+  const filtered = applications
+    .filter((a) => statusFilter === 'all' || a.status === statusFilter)
+    .filter((a) => communityFilter === 'all' || a.major_community === communityFilter);
 
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
@@ -68,6 +71,16 @@ export default function AdminDashboard() {
             <option value="all">All Statuses</option>
             {Object.entries(STATUS_LABELS).map(([key, label]) => (
               <option key={key} value={key}>{label}</option>
+            ))}
+          </select>
+          <select
+            value={communityFilter}
+            onChange={(e) => setCommunityFilter(e.target.value)}
+            className="rounded-md border border-input bg-card px-3 py-1.5 text-sm text-foreground"
+          >
+            <option value="all">All Communities</option>
+            {OVIM_MAJOR_COMMUNITIES.map((community) => (
+              <option key={community} value={community}>{community}</option>
             ))}
           </select>
         </div>

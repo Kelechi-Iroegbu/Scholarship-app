@@ -9,6 +9,8 @@ const APPLICATION_COLUMNS = [
   'status',
   'date_of_birth',
   'indigene_confirmed',
+  'major_community',
+  'autonomous_community',
   'address',
   'school',
   'school_in_isuikwuato',
