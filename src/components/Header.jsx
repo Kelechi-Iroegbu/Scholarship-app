@@ -50,12 +50,12 @@ export default function Header() {
     <header className="sticky top-0 z-50 bg-card/95 backdrop-blur border-b border-border">
       {/* Top row: brand + apply button */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex h-20 items-center justify-between">
+        <div className="flex h-24 sm:h-28 items-center justify-between">
           <Link to="/" className="header-logo flex items-center gap-4 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">
             <img
               src="/images/logo.png"
               alt="Anna Nnenna Egbe Queen Heart of Peace Educational Foundation"
-              className="h-11 w-11 object-contain shrink-0"
+              className="h-16 w-16 sm:h-20 sm:w-20 object-contain shrink-0"
             />
             <span className="leading-tight">
               <span className="block font-heading text-base sm:text-lg font-semibold text-foreground tracking-tight">
