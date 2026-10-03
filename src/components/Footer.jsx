@@ -24,13 +24,12 @@ export default function Footer() {
     <footer className="bg-band text-band-foreground">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 grid gap-10 sm:grid-cols-2 md:grid-cols-4">
         <div>
-          <div className="flex items-center gap-3">
+          <div>
             <img
               src="/images/logo.png"
               alt="Anna Nnenna Egbe Queen Heart of Peace Educational Foundation"
-              className="h-16 w-16 sm:h-20 sm:w-20 object-contain shrink-0"
+              className="h-28 w-auto object-contain rounded-xl bg-white p-2"
             />
-            <h3 className="font-heading text-base font-semibold">Anna Nnenna Egbe Queen Heart of Peace Educational Foundation</h3>
           </div>
           <p className="mt-4 text-sm text-band-foreground/70 leading-relaxed">
             Empowering Ovim's youth through education and opportunity.

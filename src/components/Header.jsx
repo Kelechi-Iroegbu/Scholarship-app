@@ -55,13 +55,8 @@ export default function Header() {
             <img
               src="/images/logo.png"
               alt="Anna Nnenna Egbe Queen Heart of Peace Educational Foundation"
-              className="h-16 w-16 sm:h-20 sm:w-20 object-contain shrink-0"
+              className="h-20 sm:h-24 w-auto object-contain shrink-0"
             />
-            <span className="leading-tight">
-              <span className="block font-heading text-base sm:text-lg font-semibold text-foreground tracking-tight">
-                Anna Nnenna Egbe Queen Heart of Peace Educational Foundation
-              </span>
-            </span>
           </Link>
 
           <div className="flex items-center gap-3">
