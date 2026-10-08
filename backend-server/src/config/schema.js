@@ -83,6 +83,16 @@ const DDL = `
     created_date TIMESTAMPTZ NOT NULL DEFAULT now()
   );
   CREATE INDEX IF NOT EXISTS messages_application_id_idx ON messages(application_id);
+
+  -- Uploaded files live in Postgres, not on disk: most hosts wipe local disk
+  -- on every redeploy, which orphaned every attachment.
+  CREATE TABLE IF NOT EXISTS uploaded_files (
+    id TEXT PRIMARY KEY,
+    file_name TEXT NOT NULL,
+    mime_type TEXT NOT NULL,
+    data BYTEA NOT NULL,
+    created_date TIMESTAMPTZ NOT NULL DEFAULT now()
+  );
 `;
 
 export const ensureSchema = async () => {

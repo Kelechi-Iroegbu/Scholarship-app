@@ -17,7 +17,7 @@ export default function StepDocuments({ applicationId, documents, onDocumentsCha
       return;
     }
     if (file.size > MAX_FILE_SIZE) {
-      setError('File must be 5MB or smaller.');
+      setError('This file is too large. Each upload must not exceed 10MB.');
       return;
     }
     setUploadingType(type);
@@ -31,6 +31,8 @@ export default function StepDocuments({ applicationId, documents, onDocumentsCha
         const saved = await appClient.entities.Document.create({ application_id: applicationId, type, file_url, file_name: file.name });
         onDocumentsChange([...documents, saved]);
       }
+    } catch (err) {
+      setError(err.message || 'Upload failed. Please try again.');
     } finally {
       setUploadingType(null);
     }
@@ -41,7 +43,7 @@ export default function StepDocuments({ applicationId, documents, onDocumentsCha
       <div>
         <h2 className="font-heading text-xl font-semibold text-foreground">Document Upload</h2>
         <p className="mt-1.5 text-sm text-muted-foreground">
-          Accepted formats: PDF, JPG, PNG. Maximum file size: 5MB.
+          Accepted formats: PDF, JPG, PNG. All uploads must not exceed 10MB each.
         </p>
       </div>
       {error && <p className="text-sm text-destructive">{error}</p>}

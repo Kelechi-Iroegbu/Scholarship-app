@@ -20,8 +20,7 @@ export default function AdminDashboard() {
         setLoading(false);
         return;
       }
-      setAuthorized(true);
-      const [apps, cycleList] = await Promise.all([
+      setAuthorized(true);      const [apps, cycleList] = await Promise.all([
         appClient.entities.Application.list('-created_date'),
         appClient.entities.ApplicationCycle.list('-created_date'),
       ]);

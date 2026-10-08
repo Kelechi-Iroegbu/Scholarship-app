@@ -13,9 +13,9 @@ export default function DocumentsList({ documents }) {
             <FileText className="h-4 w-4 text-primary shrink-0" />
             <span className="text-foreground/90">{label}:</span>
             {doc ? (
-              <a href={appClient.resolveFileUrl(doc.file_url)} target="_blank" rel="noreferrer" className="text-primary underline">
+              <button type="button" onClick={() => appClient.openFile(doc.file_url)} className="text-primary underline text-left break-all">
                 {doc.file_name}
-              </a>
+              </button>
             ) : (
               <span className="text-muted-foreground">Not submitted</span>
             )}

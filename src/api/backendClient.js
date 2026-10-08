@@ -10,6 +10,31 @@ const resolveFileUrl = (fileUrl) => {
   return `${API_BASE_URL}${fileUrl}`;
 };
 
+// Files are only served to authorized users, and a plain <a href> can't send
+// the Bearer token — so fetch with it and open the blob in a new tab. The tab
+// is opened synchronously first so the popup blocker allows it.
+const openFile = async (fileUrl) => {
+  const tab = window.open('', '_blank');
+  try {
+    const response = await fetch(resolveFileUrl(fileUrl), {
+      headers: { Authorization: `Bearer ${getAccessToken()}` }
+    });
+    if (!response.ok) {
+      const data = await response.json().catch(() => null);
+      throw new Error(data?.message || 'Unable to open file');
+    }
+    const blobUrl = URL.createObjectURL(await response.blob());
+    if (tab) {
+      tab.location.href = blobUrl;
+    } else {
+      window.location.href = blobUrl;
+    }
+  } catch (error) {
+    tab?.close();
+    window.alert(error.message || 'Unable to open file');
+  }
+};
+
 const getAccessToken = () => window.localStorage.getItem('access_token');
 const setAccessToken = (token) => {
   if (token) {
@@ -199,5 +224,6 @@ export const api = {
   uploadFile,
   setAccessToken,
   getAccessToken,
-  resolveFileUrl
+  resolveFileUrl,
+  openFile
 };

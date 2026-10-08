@@ -6,8 +6,13 @@ import StatusBadge from '@/components/admin/StatusBadge';
 import NotesPanel from '@/components/admin/NotesPanel';
 import { STATUS_LABELS } from '@/lib/applicationConstants';
 
+// TODO: only this admin may open attachments for now; remove to open viewing to
+// all admins (and the matching check in backend-server uploadController.js).
+const VIEW_FILES_ALLOWED_EMAIL = 'kiroegbu@gmail.com';
+
 export default function AdminApplicationDetail() {
   const { id } = useParams();
+  const [canViewFiles, setCanViewFiles] = useState(false);
   const [loading, setLoading] = useState(true);
   const [authorized, setAuthorized] = useState(false);
   const [application, setApplication] = useState(null);
@@ -24,6 +29,7 @@ export default function AdminApplicationDetail() {
         return;
       }
       setAuthorized(true);
+      setCanViewFiles(user.email?.toLowerCase() === VIEW_FILES_ALLOWED_EMAIL);
       const app = await appClient.entities.Application.get(id);
       const [docs, allMessages] = await Promise.all([
         appClient.entities.Document.filter({ application_id: id }),
@@ -156,7 +162,11 @@ export default function AdminApplicationDetail() {
         <ul className="mt-3 space-y-1">
           {documents.map((d) => (
             <li key={d.id} className="text-sm">
-              <a href={appClient.resolveFileUrl(d.file_url)} target="_blank" rel="noreferrer" className="text-primary underline">{d.file_name}</a>
+              {canViewFiles ? (
+                <button type="button" onClick={() => appClient.openFile(d.file_url)} className="text-primary underline text-left">{d.file_name}</button>
+              ) : (
+                <span className="text-foreground">{d.file_name} <span className="text-muted-foreground">(viewing restricted)</span></span>
+              )}
               <span className="ml-2 text-muted-foreground">({d.type})</span>
             </li>
           ))}

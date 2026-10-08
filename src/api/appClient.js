@@ -70,6 +70,7 @@ const appClient = {
     },
   },
   resolveFileUrl: (fileUrl) => api.resolveFileUrl(fileUrl),
+  openFile: (fileUrl) => api.openFile(fileUrl),
 };
 
 export { appClient };

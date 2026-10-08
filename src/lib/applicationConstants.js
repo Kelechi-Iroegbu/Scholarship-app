@@ -32,9 +32,10 @@ export const DOCUMENT_TYPES = [
   { key: 'ssce_result', label: 'SSCE Result' },
   { key: 'jamb_result_slip', label: 'JAMB Examination Result Slip' },
   { key: 'admission_letter', label: 'University Admission Letter' },
+  { key: 'passport_photograph', label: 'Passport Photograph' },
 ];
 
-export const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
+export const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB — keep in sync with backend-server uploadRoutes.js
 export const ACCEPTED_FILE_TYPES = '.pdf,.jpg,.jpeg,.png';
 
 export function countWords(text) {
