@@ -21,3 +21,11 @@ export const updateApplication = async (req, res) => {
   await Application.save(application);
   res.json(application);
 };
+
+export const deleteApplication = async (req, res) => {
+  const removed = await Application.remove(req.params.id);
+  if (!removed) {
+    return res.status(404).json({ message: 'Application not found' });
+  }
+  res.json({ success: true });
+};

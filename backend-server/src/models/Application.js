@@ -84,4 +84,22 @@ export const Application = {
       [...values, application.id]
     );
   },
+
+  // documents and messages reference applications(id), so remove them first.
+  remove: async (id) => {
+    const client = await pool.connect();
+    try {
+      await client.query('BEGIN');
+      await client.query('DELETE FROM documents WHERE application_id = $1', [id]);
+      await client.query('DELETE FROM messages WHERE application_id = $1', [id]);
+      const { rowCount } = await client.query('DELETE FROM applications WHERE id = $1', [id]);
+      await client.query('COMMIT');
+      return rowCount > 0;
+    } catch (error) {
+      await client.query('ROLLBACK');
+      throw error;
+    } finally {
+      client.release();
+    }
+  },
 };

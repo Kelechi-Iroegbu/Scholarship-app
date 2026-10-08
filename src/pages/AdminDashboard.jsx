@@ -31,6 +31,19 @@ export default function AdminDashboard() {
     })();
   }, []);
 
+  const handleDelete = async (app) => {
+    const label = app.full_name || app.email || 'this application';
+    if (!window.confirm(`Permanently delete the application from ${label}? This also deletes its documents and messages and cannot be undone.`)) {
+      return;
+    }
+    try {
+      await appClient.entities.Application.delete(app.id);
+      setApplications((prev) => prev.filter((a) => a.id !== app.id));
+    } catch (error) {
+      window.alert(error.message || 'Failed to delete application');
+    }
+  };
+
   if (loading) {
     return (
       <div className="flex items-center justify-center py-32">
@@ -84,7 +97,7 @@ export default function AdminDashboard() {
             ))}
           </select>
         </div>
-        <ApplicationsTable applications={filtered} />
+        <ApplicationsTable applications={filtered} onDelete={handleDelete} />
       </div>
     </div>
   );

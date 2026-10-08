@@ -11,6 +11,7 @@ router.use(requireAuth, requireAdmin);
 router.get('/applications', asyncHandler(adminController.listApplications));
 router.get('/applications/:id', asyncHandler(adminController.getApplication));
 router.put('/applications/:id', asyncHandler(adminController.updateApplication));
+router.delete('/applications/:id', asyncHandler(adminController.deleteApplication));
 
 router.get('/cycles', asyncHandler(cycleController.listAll));
 router.post('/cycles', asyncHandler(cycleController.create));

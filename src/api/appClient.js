@@ -52,6 +52,7 @@ const appClient = {
       filter: async (params) => api.applications.list(params),
       create: async (payload) => api.applications.create(payload),
       update: async (id, payload) => api.applications.update(id, payload),
+      delete: async (id) => api.admin.applications.remove(id),
     },
     Document: {
       filter: async (params) => api.documents.list(params),

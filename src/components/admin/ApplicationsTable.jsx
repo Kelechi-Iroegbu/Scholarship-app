@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import StatusBadge from '@/components/admin/StatusBadge';
 
-export default function ApplicationsTable({ applications }) {
+export default function ApplicationsTable({ applications, onDelete }) {
   if (!applications.length) {
     return <p className="mt-6 text-sm text-muted-foreground">No applications match this filter.</p>;
   }
@@ -29,7 +29,16 @@ export default function ApplicationsTable({ applications }) {
                 {app.major_community ? `${app.major_community} · ${app.autonomous_community || '—'}` : '—'}
               </td>
               <td className="px-4 py-3"><StatusBadge status={app.status} /></td>
-              <td className="px-4 py-3 text-right">
+              <td className="px-4 py-3 text-right whitespace-nowrap">
+                {onDelete && (
+                  <button
+                    type="button"
+                    onClick={() => onDelete(app)}
+                    className="mr-4 text-destructive font-medium hover:underline rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-destructive"
+                  >
+                    Delete
+                  </button>
+                )}
                 <Link
                   to={`/admin/applications/${app.id}`}
                   className="text-primary font-medium hover:underline rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"

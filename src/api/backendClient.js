@@ -162,6 +162,9 @@ const admin = {
     },
     update: async (id, payload) => {
       return request(`/api/admin/applications/${id}`, { method: 'PUT', body: payload });
+    },
+    remove: async (id) => {
+      return request(`/api/admin/applications/${id}`, { method: 'DELETE' });
     }
   }
 };
