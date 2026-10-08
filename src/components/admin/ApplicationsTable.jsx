@@ -13,6 +13,7 @@ export default function ApplicationsTable({ applications, onDelete }) {
           <tr>
             <th className="px-4 py-3">Name</th>
             <th className="px-4 py-3">Email</th>
+            <th className="px-4 py-3">Phone</th>
             <th className="px-4 py-3">School</th>
             <th className="px-4 py-3">Community</th>
             <th className="px-4 py-3">Status</th>
@@ -24,6 +25,7 @@ export default function ApplicationsTable({ applications, onDelete }) {
             <tr key={app.id} className="bg-card hover:bg-muted/50 transition-colors">
               <td className="px-4 py-3 text-foreground">{app.full_name || '—'}</td>
               <td className="px-4 py-3 text-muted-foreground">{app.email || '—'}</td>
+              <td className="px-4 py-3 text-muted-foreground whitespace-nowrap">{app.phone || '—'}</td>
               <td className="px-4 py-3 text-muted-foreground">{app.school || '—'}</td>
               <td className="px-4 py-3 text-muted-foreground">
                 {app.major_community ? `${app.major_community} · ${app.autonomous_community || '—'}` : '—'}
